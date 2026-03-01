@@ -139,7 +139,7 @@ function App() {
                 <div className="group relative">
                   <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-emerald-400 to-cyan-400 opacity-75 blur transition duration-300 group-hover:opacity-100"></div>
                   <a href="https://qiita.com/kichita" target="_blank" rel="noopener noreferrer" className="relative block overflow-hidden rounded-full ring-4 ring-white transition-transform duration-500 group-hover:scale-105">
-                    <img src="/avatar.png" alt="Profile" className="h-40 w-40 object-cover" />
+                    <img src="./avatar.png" alt="Profile" className="h-40 w-40 object-cover" />
                   </a>
                 </div>
                 <div className="mt-6 flex items-center justify-center gap-2 font-bold transition-colors hover:text-[#55C500]">
