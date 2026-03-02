@@ -1,11 +1,16 @@
 
 import {
-  FaHtml5, FaCss3Alt, FaReact, FaVuejs, FaGithub, FaMicrosoft, FaDatabase, FaCode, FaRobot
+  FaHtml5, FaReact, FaVuejs, FaGithub, FaMicrosoft, FaDatabase, FaRobot
 } from 'react-icons/fa';
 import {
   SiJavascript, SiTypescript, SiTailwindcss, SiJest, SiVite, SiQiita
 } from 'react-icons/si';
 import { TbBrandCSharp } from 'react-icons/tb';
+
+// Components
+import ExperienceItem from './components/ExperienceItem';
+import SkillCard from './components/SkillCard';
+import ProjectCard from './components/ProjectCard';
 
 function App() {
   const experiences = [
@@ -70,6 +75,50 @@ function App() {
       description: "新卒プログラマとしてキャリアをスタート。",
       details: [],
       techs: []
+    }
+  ];
+
+  const skillCategories = [
+    {
+      title: 'Frontend',
+      icon: <FaReact className="text-cyan-400" />,
+      skills: [
+        { name: 'HTML / CSS', icon: <FaHtml5 color="#E34F26" /> },
+        { name: 'JavaScript', icon: <SiJavascript color="#F7DF1E" /> },
+        { name: 'TypeScript', icon: <SiTypescript color="#3178C6" /> },
+        { name: 'React', icon: <FaReact color="#61DAFB" />, primary: true },
+        { name: 'Vite', icon: <SiVite color="#646CFF" />, primary: true },
+        { name: 'Vue.js', icon: <FaVuejs color="#4FC08D" /> },
+        { name: 'Tailwind CSS', icon: <SiTailwindcss color="#06B6D4" /> }
+      ]
+    },
+    {
+      title: 'Backend',
+      icon: <TbBrandCSharp className="text-violet-500" />,
+      skills: [
+        { name: 'C#', icon: <TbBrandCSharp color="#68217A" /> },
+        { name: 'SQL Server', icon: <FaDatabase color="#CC292B" /> }
+      ]
+    },
+    {
+      title: 'Workflow',
+      icon: <FaGithub className="text-slate-800" />,
+      skills: [
+        { name: 'GitHub Copilot', icon: <FaRobot color="#000" />, primary: true },
+        { name: 'Git / GitHub', icon: <FaGithub /> },
+        { name: 'Jest', icon: <SiJest color="#C21325" /> },
+        { name: 'Power Apps', icon: <FaMicrosoft color="#00A4EF" /> }
+      ]
+    }
+  ];
+
+  const projects = [
+    {
+      title: "Portfolio Website",
+      type: "Personal Project",
+      description: "AIコーディングアシスタントと対話し、「仕様駆動開発」のアプローチでゼロから構築したReact製のWebサイト。",
+      techs: ['React', 'Vite', 'Tailwind CSS'],
+      githubUrl: "#"
     }
   ];
 
@@ -162,33 +211,11 @@ function App() {
             {/* Timeline */}
             <div className="mt-20 space-y-12">
               {experiences.map((exp, index) => (
-                <div key={index} className="group relative pl-8 before:absolute before:left-0 before:top-2 before:h-full before:w-px before:bg-slate-200 last:before:hidden">
-                  <div className="absolute left-[-5px] top-2 h-[11px] w-[11px] rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors"></div>
-                  <div className="mb-1 text-sm font-bold tracking-widest text-indigo-500 uppercase">{exp.date}</div>
-                  <div className="flex flex-wrap items-baseline gap-3 mb-3">
-                    <h3 className="text-2xl font-black text-slate-900">{exp.title}</h3>
-                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-500 uppercase tracking-wider">{exp.role}</span>
-                  </div>
-                  <p className="mb-4 text-slate-600 leading-relaxed font-medium">{exp.description}</p>
-
-                  {exp.details && exp.details.length > 0 && (
-                    <ul className="mb-6 space-y-2 text-sm text-slate-500 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                      {exp.details.map((detail, idx) => (
-                        <li key={idx} className="flex gap-2 before:content-['•'] before:text-indigo-400 font-medium">
-                          <span>{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {exp.techs && exp.techs.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {exp.techs.map((tech, idx) => (
-                        <span key={idx} className="rounded-lg bg-white px-3 py-1 text-xs font-bold text-indigo-600 ring-1 ring-slate-200 group-hover:ring-indigo-200 transition-all">{tech}</span>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <ExperienceItem
+                  key={index}
+                  exp={exp}
+                  isLast={index === experiences.length - 1}
+                />
               ))}
             </div>
           </div>
@@ -202,59 +229,8 @@ function App() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {[
-              {
-                title: 'Frontend',
-                icon: <FaReact className="text-cyan-400" />,
-                skills: [
-                  { name: 'HTML / CSS', icon: <FaHtml5 color="#E34F26" /> },
-                  { name: 'JavaScript', icon: <SiJavascript color="#F7DF1E" /> },
-                  { name: 'TypeScript', icon: <SiTypescript color="#3178C6" /> },
-                  { name: 'React', icon: <FaReact color="#61DAFB" />, primary: true },
-                  { name: 'Vite', icon: <SiVite color="#646CFF" />, primary: true },
-                  { name: 'Vue.js', icon: <FaVuejs color="#4FC08D" /> },
-                  { name: 'Tailwind CSS', icon: <SiTailwindcss color="#06B6D4" /> }
-                ]
-              },
-              {
-                title: 'Backend',
-                icon: <TbBrandCSharp className="text-violet-500" />,
-                skills: [
-                  { name: 'C#', icon: <TbBrandCSharp color="#68217A" /> },
-                  { name: 'SQL Server', icon: <FaDatabase color="#CC292B" /> }
-                ]
-              },
-              {
-                title: 'Workflow',
-                icon: <FaGithub className="text-slate-800" />,
-                skills: [
-                  { name: 'GitHub Copilot', icon: <FaRobot color="#000" />, primary: true },
-                  { name: 'Git / GitHub', icon: <FaGithub /> },
-                  { name: 'Jest', icon: <SiJest color="#C21325" /> },
-                  { name: 'Power Apps', icon: <FaMicrosoft color="#00A4EF" /> }
-                ]
-              }
-            ].map((cat) => (
-              <div key={cat.title} className="rounded-[2rem] bg-white p-8 shadow-xl shadow-slate-200 ring-1 ring-slate-100 transition-transform hover:-translate-y-2">
-                <div className="mb-6 flex items-center gap-3 text-xl font-black text-slate-900">
-                  <div className="rounded-xl bg-slate-50 p-3 text-2xl shadow-inner">{cat.icon}</div>
-                  {cat.title}
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {cat.skills.map((skill) => (
-                    <span
-                      key={skill.name}
-                      className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-bold transition-all ${skill.primary
-                        ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200'
-                        : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
-                        }`}
-                    >
-                      {skill.icon}
-                      {skill.name}
-                    </span>
-                  ))}
-                </div>
-              </div>
+            {skillCategories.map((cat) => (
+              <SkillCard key={cat.title} {...cat} />
             ))}
           </div>
         </section>
@@ -267,29 +243,9 @@ function App() {
           </div>
 
           <div className="grid gap-12 md:grid-cols-2">
-            <div className="group overflow-hidden rounded-[2.5rem] bg-white shadow-2xl shadow-slate-200 ring-1 ring-slate-100 transition-all hover:ring-indigo-300">
-              <div className="bg-gradient-to-br from-indigo-500 to-violet-600 px-8 py-10 transition-all group-hover:scale-105">
-                <div className="mb-4 inline-flex rounded-full bg-white/20 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm">
-                  Personal Project
-                </div>
-                <h3 className="text-3xl font-black text-white">Portfolio Website</h3>
-              </div>
-              <div className="p-8">
-                <p className="mb-6 text-slate-600 leading-relaxed font-medium">
-                  AIコーディングアシスタントと対話し、「仕様駆動開発」のアプローチでゼロから構築したReact製のWebサイト。
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {['React', 'Vite', 'Tailwind CSS'].map(t => (
-                    <span key={t} className="rounded-lg bg-indigo-50 px-3 py-1 text-xs font-bold text-indigo-600 uppercase tracking-wider">{t}</span>
-                  ))}
-                </div>
-                <div className="mt-8">
-                  <a href="#" className="inline-flex items-center gap-2 font-bold text-slate-900 hover:text-indigo-600 transition-colors">
-                    <FaGithub /> View Source Code →
-                  </a>
-                </div>
-              </div>
-            </div>
+            {projects.map((project, index) => (
+              <ProjectCard key={index} {...project} />
+            ))}
 
             <div className="flex flex-col items-center justify-center rounded-[2.5rem] border-4 border-dashed border-slate-200 p-12 transition-all hover:border-indigo-300 hover:bg-indigo-50/30">
               <div className="mb-4 rounded-full bg-slate-100 p-6 text-4xl text-slate-300 transition-colors group-hover:bg-indigo-100 group-hover:text-indigo-400">✨</div>
